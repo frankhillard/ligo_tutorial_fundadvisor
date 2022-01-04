@@ -2,10 +2,7 @@
     (or (or (lambda %changeAlgorithm int bool) (int %receiveValue)) (unit %requestValue)) ;
   storage
     (pair (pair (lambda %algorithm int bool) (address %indiceAddress)) (bool %result)) ;
-  code { DUP ;
-         CDR ;
-         SWAP ;
-         CAR ;
+  code { UNPAIR ;
          IF_LEFT
            { IF_LEFT
                { SWAP ;
@@ -37,7 +34,10 @@
              CAR ;
              CDR ;
              CONTRACT %sendValue unit ;
-             IF_NONE { PUSH string "indice cannot send its value" ; FAILWITH } {} ;
+             IF_NONE
+               { PUSH string "the targeted contract has not entrypoint sendValue" ;
+                 FAILWITH }
+               {} ;
              PUSH mutez 0 ;
              UNIT ;
              TRANSFER_TOKENS ;
