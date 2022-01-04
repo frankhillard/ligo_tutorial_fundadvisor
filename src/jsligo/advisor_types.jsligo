@@ -1,4 +1,4 @@
-type advisorAlgo = ((int) => bool);
+type advisorAlgo = ((a: int) => bool);
 
 type advisorStorage = {
     indiceAddress : address,
@@ -6,6 +6,6 @@ type advisorStorage = {
     result : bool
 };
 
-type advisorEntrypoints = ["ReceiveValue", int] | ["RequestValue", unit] | ["ChangeAlgorithm", advisorAlgo];
+type advisorEntrypoints = ["ReceiveValue", int] | ["RequestValue"] | ["ChangeAlgorithm", advisorAlgo];
 
 type advisorFullReturn =  [list<operation>, advisorStorage];
